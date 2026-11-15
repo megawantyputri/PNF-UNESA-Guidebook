@@ -179,6 +179,28 @@ html,body{height:100%;margin:0;background:#1f2d3d;color:#fff;font-family:system-
   var m=/^#p(\d+)$/.exec(location.hash);
   if(m){cur=Math.max(1,Math.min(TOTAL,+m[1]));go(cur,true)}
   render();
+
+  /* Halaman tambahan: otomatis terdeteksi kalau ada page-13, page-14, dst
+     (jpg / png / webp). Berhenti di nomor pertama yang tidak ditemukan. */
+  var EXT2=['jpg','png','webp'],wanted=m?+m[1]:1;
+  function probe(n){
+    if(n>60)return;
+    var t=new Image(),i=0;
+    var base='page-'+(n<10?'0':'')+n;
+    t.onload=function(){
+      var sec=document.createElement('section');
+      sec.className='slide';sec.setAttribute('aria-label','Halaman '+n);
+      var im=document.createElement('img');
+      im.src=t.src;im.alt='Halaman '+n+' Travel Guide Hand Book';im.draggable=false;
+      sec.appendChild(im);pager.appendChild(sec);
+      TOTAL=n;render();
+      if(wanted===n)go(n,true);
+      probe(n+1);
+    };
+    t.onerror=function(){ if(++i<EXT2.length)t.src=base+'.'+EXT2[i]; };
+    t.src=base+'.'+EXT2[0];
+  }
+  probe(TOTAL+1);
 })();
 </script>
 </body>
