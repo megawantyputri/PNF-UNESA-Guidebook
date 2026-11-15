@@ -65,18 +65,18 @@ html,body{height:100%;margin:0;background:#1f2d3d;color:#fff;font-family:system-
     <button class="arrow l" id="al" aria-label="Halaman sebelumnya">‹</button>
     <button class="arrow r" id="ar" aria-label="Halaman berikutnya">›</button>
     <main class="pager" id="pager">
-    <section class="slide" aria-label="Halaman 1 dari 12"><img src="page-01.webp" width="900" height="1600" alt="Halaman 1 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 2 dari 12"><img src="page-02.webp" width="900" height="1600" alt="Halaman 2 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 3 dari 12"><img src="page-03.webp" width="900" height="1600" alt="Halaman 3 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 4 dari 12"><img src="page-04.webp" width="900" height="1600" alt="Halaman 4 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 5 dari 12"><img src="page-05.webp" width="900" height="1600" alt="Halaman 5 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 6 dari 12"><img src="page-06.webp" width="900" height="1600" alt="Halaman 6 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 7 dari 12"><img src="page-07.webp" width="900" height="1600" alt="Halaman 7 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 8 dari 12"><img src="page-08.webp" width="900" height="1600" alt="Halaman 8 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 9 dari 12"><img src="page-09.webp" width="900" height="1600" alt="Halaman 9 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 10 dari 12"><img src="page-10.webp" width="900" height="1600" alt="Halaman 10 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 11 dari 12"><img src="page-11.webp" width="900" height="1600" alt="Halaman 11 Travel Guide Hand Book" draggable="false"></section>
-    <section class="slide" aria-label="Halaman 12 dari 12"><img src="page-12.webp" width="900" height="1600" alt="Halaman 12 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 1 dari 12"><img data-base="page-01" width="900" height="1600" alt="Halaman 1 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 2 dari 12"><img data-base="page-02" width="900" height="1600" alt="Halaman 2 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 3 dari 12"><img data-base="page-03" width="900" height="1600" alt="Halaman 3 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 4 dari 12"><img data-base="page-04" width="900" height="1600" alt="Halaman 4 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 5 dari 12"><img data-base="page-05" width="900" height="1600" alt="Halaman 5 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 6 dari 12"><img data-base="page-06" width="900" height="1600" alt="Halaman 6 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 7 dari 12"><img data-base="page-07" width="900" height="1600" alt="Halaman 7 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 8 dari 12"><img data-base="page-08" width="900" height="1600" alt="Halaman 8 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 9 dari 12"><img data-base="page-09" width="900" height="1600" alt="Halaman 9 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 10 dari 12"><img data-base="page-10" width="900" height="1600" alt="Halaman 10 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 11 dari 12"><img data-base="page-11" width="900" height="1600" alt="Halaman 11 Travel Guide Hand Book" draggable="false"></section>
+    <section class="slide" aria-label="Halaman 12 dari 12"><img data-base="page-12" width="900" height="1600" alt="Halaman 12 Travel Guide Hand Book" draggable="false"></section>
     </main>
   </div>
 
@@ -88,6 +88,18 @@ html,body{height:100%;margin:0;background:#1f2d3d;color:#fff;font-family:system-
   </footer>
 </div>
 
+<script>
+/* Gambar halaman: mencoba page-XX.jpg, lalu .png, lalu .webp.
+   Jadi cukup upload page-07.jpg untuk mengganti halaman 7. */
+(function(){
+  var EXT=['jpg','png','webp'];
+  function load(img,i){
+    img.onerror=function(){ if(i+1<EXT.length) load(img,i+1); };
+    img.src=img.getAttribute('data-base')+'.'+EXT[i];
+  }
+  [].forEach.call(document.querySelectorAll('img[data-base]'),function(img){load(img,0)});
+})();
+</script>
 <script>
 (function(){
   var TOTAL=12;
